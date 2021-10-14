@@ -1,0 +1,8 @@
+{
+    "zone": "example.com",
+    "nameserver": "ns1.pns.de",
+    "context": "1234567",
+    "url": "https://api.autodns.com/v1",
+    "username": "example_user",
+    "password": "example_password"
+}

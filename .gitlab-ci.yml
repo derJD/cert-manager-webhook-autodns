@@ -1,0 +1,3 @@
+---
+
+include: { project: gitlab/ci-templates, file: docker-build.yml }
