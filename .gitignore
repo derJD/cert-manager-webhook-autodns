@@ -5,6 +5,10 @@
 *.so
 *.dylib
 
+# do not include config.json.
+# This file is for testing only but contains valid config anyways
+config.json
+
 # Test binary, build with `go test -c`
 *.test
 
