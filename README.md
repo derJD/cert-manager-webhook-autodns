@@ -22,6 +22,7 @@ Follow the [instructions](https://cert-manager.io/docs/installation/) using the 
 **To install the webhook run:**
 
 ```bash
+# Clone this repository and ...
 helm install --namespace cert-manager cert-manager-webhook-autodns deploy/cert-manager-webhook-autodns
 ```
 
@@ -33,7 +34,7 @@ helm install --namespace cert-manager cert-manager-webhook-autodns deploy/cert-m
 helm uninstall --namespace cert-manager cert-manager-webhook-autodns
 ```
 
-Values for customization via *values.yaml* or *--set* can be seen [here](deploy/values.yaml)
+Values for customization via *values.yaml* or *--set* can be seen [here](deploy/cert-manager-webhook-autodns/values.yaml)
 
 ## Issuer
 
@@ -66,7 +67,7 @@ spec:
               url: https://api.autodns.com/v1
               zone: example.com # (Optional): When not provided the Zone will obtained by cert-manager's ResolvedZone
               nameserver: ns1.pns.de # (Mandatory): Nameserver used for RR updates
-              context: 1234567 # (Mandatory): [PersonalAutoDNS Context number](https://help.internetx.com/display/APIXMLEN/Authentication#Authentication-AuthenticationviaCredentials(username/password/context) used for authentification
+              context: 1234567 # (Mandatory): PersonalAutoDNS Context number used for authentification
               username: example_username # (Mandatory): Username for basic auth.
               password: example_password # (Mandatory): Password for basic auth.
 ```
