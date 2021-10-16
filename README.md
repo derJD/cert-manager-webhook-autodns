@@ -1,6 +1,8 @@
 # ACME webhook for AutoDNS API
 
-This solver can be used when you want to use cert-manager with Hetzner DNS API. API documentation is [here](https://dns.hetzner.com/api-docs)
+Solver enabling cert-manager to interact with [AutoDNS API](https://help.internetx.com/display/APIXMLEN/JSON+API+Basics).
+
+> This Solver took heavy inspiration from [cert-manager-webhook-hetzner](https://github.com/vadimkim/cert-manager-webhook-hetzner)
 
 ## Requirements
 
@@ -28,7 +30,7 @@ helm install --namespace cert-manager cert-manager-webhook-autodns deploy/cert-m
 **To uninstall the webhook run:**
 
 ```bash
-helm uninstall --namespace cert-manager cert-manager-webhook-hetzner
+helm uninstall --namespace cert-manager cert-manager-webhook-autodns
 ```
 
 Values for customization via *values.yaml* or *--set* can be seen [here](deploy/values.yaml)
