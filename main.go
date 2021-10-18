@@ -68,7 +68,9 @@ func (c *autoDNSProviderSolver) Present(ch *v1alpha1.ChallengeRequest) error {
 		return err
 	}
 
-	cfg.Zone = ch.ResolvedZone
+	if cfg.Zone == "" {
+		cfg.Zone = ch.ResolvedZone
+	}
 	jsonData, err := json.Marshal(AutoDNSData{
 		Origin: ch.ResolvedZone,
 		ResourceRecordsAdd: []AutoDNSResourceRecordData{
@@ -93,7 +95,9 @@ func (c *autoDNSProviderSolver) CleanUp(ch *v1alpha1.ChallengeRequest) error {
 		return err
 	}
 
-	cfg.Zone = ch.ResolvedZone
+	if cfg.Zone == "" {
+		cfg.Zone = ch.ResolvedZone
+	}
 	jsonData, err := json.Marshal(AutoDNSData{
 		Origin: ch.ResolvedZone,
 		ResourceRecordsRem: []AutoDNSResourceRecordData{
