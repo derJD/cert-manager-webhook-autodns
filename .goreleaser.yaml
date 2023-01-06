@@ -1,0 +1,48 @@
+---
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - binary: webhook
+    env:
+      - CGO_ENABLED=0
+    ldflags: '-w -extldflags "-static"'
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - "amd64"
+      - "arm64"
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      amd64: x86_64
+dockers:
+- image_templates:
+  - 'r.planetary-quantum.com/runway-public/cert-manager-webhook-autodns:{{ .Tag }}-amd64'
+  dockerfile: Dockerfile
+  use: buildx
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/amd64"
+  goarch: amd64
+docker_manifests:
+- name_template: r.planetary-quantum.com/runway-public/cert-manager-webhook-autodns:{{ .Tag }}
+  image_templates:
+  - r.planetary-quantum.com/runway-public/cert-manager-webhook-autodns:{{ .Tag }}-amd64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'

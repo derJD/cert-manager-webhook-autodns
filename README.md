@@ -1,5 +1,7 @@
 # ACME webhook for AutoDNS API
 
+_This is a fork that has been updated for Go 1.19._
+
 Solver enabling cert-manager to interact with [AutoDNS API](https://help.internetx.com/display/APIXMLEN/JSON+API+Basics).
 
 > This Solver took heavy inspiration from [cert-manager-webhook-hetzner](https://github.com/vadimkim/cert-manager-webhook-hetzner)
@@ -24,6 +26,18 @@ Follow the [instructions](https://cert-manager.io/docs/installation/) using the 
 ```bash
 # Clone this repository and ...
 helm install --namespace cert-manager cert-manager-webhook-autodns deploy/cert-manager-webhook-autodns
+```
+
+Or use our helm repository:
+
+```bash
+# discover repository
+helm repo add runway-public https://r.planetary-quantum.com/chartrepo/runway-public
+# install from it
+helm upgrade --install \
+  --create-namespace --namespace cert-manager \
+  --version a.b.c \
+  cert-manager-webhook-autodns runway-public/cert-manager-webhook-autodns
 ```
 
 **Note**: The kubernetes resources used to install the Webhook should be deployed within the same namespace as the **cert-manager**.

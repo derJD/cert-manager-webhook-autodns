@@ -13,7 +13,7 @@ certManager:
   serviceAccountName: cert-manager
 
 image:
-  repository: derjd/cert-manager-webhook-autodns
+  repository: r.planetary-quantum.com/runway-public/cert-manager-webhook-autodns
   tag: latest
   pullPolicy: IfNotPresent
 

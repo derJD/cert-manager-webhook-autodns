@@ -26,9 +26,6 @@ clean: clean-kubebuilder
 clean-kubebuilder:
 	rm -Rf _test/kubebuilder
 
-build:
-	docker build -t "$(IMAGE_NAME):$(IMAGE_TAG)" .
-
 .PHONY: rendered-manifest.yaml
 rendered-manifest.yaml:
 	helm template \
@@ -36,3 +33,11 @@ rendered-manifest.yaml:
         --set image.repository=$(IMAGE_NAME) \
         --set image.tag=$(IMAGE_TAG) \
         deploy/cert-manager-webhook-autodns > "$(OUT)/rendered-manifest.yaml"
+
+.PHONY: dev
+dev:
+	goreleaser build --single-target --snapshot --rm-dist
+
+.PHONY: build-docker
+build-docker: ## Build controller-next binary *and* docker image
+	goreleaser r --snapshot --rm-dist --skip-publish
